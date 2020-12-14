@@ -1,0 +1,6 @@
+module Pods_DoLolFight {
+  umbrella header "Pods-DoLolFight-umbrella.h"
+
+  export *
+  module * { export * }
+}
