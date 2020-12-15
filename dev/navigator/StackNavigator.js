@@ -1,8 +1,10 @@
-import { TouchableOpacity, Image, Text, StyleSheet, AsyncStorage } from 'react-native';
 import BottomTabNavigator from './BottomTabNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import TeamManageScreen from '../screen/TeamManageScreen';
+import {
+  StyleSheet,
+} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -12,22 +14,27 @@ export default class StackNavigator extends React.Component {
     return (
       <Stack.Navigator >
           <Stack.Screen
-          name="Main"
+          options={{
+            headerTitle : '두 파이트 스크린',
+            // headerTitleAlign : 'center',
+            // headerStyle : styles.headerStyle,
+            // headerTitleStyle : styles.headerTitleStyle,
+            // headerLeft : ()=>{return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle }></Image></TouchableOpacity>},
+          }}
+          name="BottomTabNavigator"
           component={BottomTabNavigator} />
 
           <Stack.Screen
           options={{
-            headerTitle : '회원정보',
-            headerTitleAlign : 'center',
-            headerStyle : styles.headerStyle,
-            headerTitleStyle : styles.headerTitleStyle,
+            headerTitle : '팀 매니지 스크린',
+            // headerTitleAlign : 'center',
+            // headerStyle : styles.headerStyle,
+            // headerTitleStyle : styles.headerTitleStyle,
             // headerLeft : ()=>{return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle }></Image></TouchableOpacity>},
           }}
           name="TeamManageScreen"
           component={TeamManageScreen} />
 
-          
-          
       </Stack.Navigator>
     )
   }

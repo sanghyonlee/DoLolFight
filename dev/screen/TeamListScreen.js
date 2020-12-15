@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -12,6 +10,8 @@ import {
 
 export default function TeamListScreen() {
   return (
-    <View>ㅁㄴㅇㄹ</View>
+    <View>
+      <Text>asdfasdf</Text>
+    </View>
   );
 }

@@ -1,17 +1,15 @@
-import { View } from "react-native";
-
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
-  Text,
-  StatusBar,
+  Text
 } from 'react-native';
 
 export default function TeamManageScreen() {
   return (
-    <View></View>
+    <View>
+      <Text>
+        팀매니지 스크린 asdfasdfkas;lfkjas;ieghawioegh;ahg;laksh;gdlakshdgfasdk;falshflakshdasdf
+      </Text>
+    </View>
   );
 }
