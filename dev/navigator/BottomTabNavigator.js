@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const BottomTab = createMaterialBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'LeagueScreen';
@@ -31,16 +32,21 @@ export default function BottomTabNavigator({ navigation, route }) {
       name="LeagueScreen"
       component={LeagueScreen}
       options={{
-        title: '홈',
+        title: '대회',
         tabBarIcon: () => {
           return <Image source={require('../assets/images/bt_nv_home.png')} style={styles.iconStyle}/>;
         },
-      }}
-      />
+      }}/>
 
       <BottomTab.Screen
       name="TeamListScreen"
       component={TeamListScreen}
+      options={{
+        title: '팀',
+        tabBarIcon: () => {
+          return <Image source={require('../assets/images/bt_nv_home.png')} style={styles.iconStyle}/>;
+        },
+      }}
       />
 
     </BottomTab.Navigator>
@@ -63,7 +69,7 @@ function getHeaderRight(navigation,route) {
 
   switch (routeName) {
     case 'LeagueScreen':
-      return <View style={styles.headerLeftStyle}><Text>as</Text></View>;
+      return <TouchableOpacity style={styles.headerLeftStyle} onPress={()=>{navigation.navigate('TeamManageScreen')}}><Text>as</Text></TouchableOpacity>;
     case 'TeamListScreen':
       return <View style={styles.headerRightStyle}><Text>vs</Text></View>;
     
@@ -76,11 +82,11 @@ const styles = StyleSheet.create({
   },
   headerTitleStyle: {
     fontWeight: 'bold',
-    color: "#000",
+    color: "#fff",
     alignSelf: 'center',
   },
   tabBarStyle : {
-    backgroundColor : "#000"
+    backgroundColor : "#fff"
   },
   iconStyle : {width:20, height:20},
   // logoImg : {width:105, height:25},

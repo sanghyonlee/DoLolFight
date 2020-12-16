@@ -4,27 +4,27 @@ import * as React from 'react';
 import TeamManageScreen from '../screen/TeamManageScreen';
 import {
   StyleSheet,
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 const Stack = createStackNavigator();
 
 export default class StackNavigator extends React.Component {
 
-  render(){
+  render() {
     return (
       <Stack.Navigator >
           <Stack.Screen
           name="Main"
-          component={BottomTabNavigator}
-          />
+          component={BottomTabNavigator}/>
 
           <Stack.Screen
           options={{
-            headerTitle : '팀 매니지 스크린',
-            // headerTitleAlign : 'center',
-            // headerStyle : styles.headerStyle,
-            // headerTitleStyle : styles.headerTitleStyle,
-            // headerLeft : ()=>{return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle }></Image></TouchableOpacity>},
+            headerTitle : '팀 관리',
+            headerTitleAlign : 'center',
+            headerStyle : styles.headerStyle,
+            headerTitleStyle : styles.headerTitleStyle,
           }}
           name="TeamManageScreen"
           component={TeamManageScreen} />
@@ -42,12 +42,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "#fff",
     alignSelf: 'center',
-  },
-  headerLeftStyle : {
-    width:16,
-    height:16,
-    resizeMode:'contain',
-    marginLeft:12
   },
   headerRightStyle : {
     width:16,

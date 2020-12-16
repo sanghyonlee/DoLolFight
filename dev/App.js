@@ -1,22 +1,15 @@
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
 } from 'react-native';
 import StackNavigator from './navigator/StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <StackNavigator></StackNavigator>
-      </NavigationContainer>
-    </View>
+    <NavigationContainer>
+      <StackNavigator></StackNavigator>
+    </NavigationContainer>
   );
 };
 
