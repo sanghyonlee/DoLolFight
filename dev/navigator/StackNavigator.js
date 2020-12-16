@@ -14,15 +14,9 @@ export default class StackNavigator extends React.Component {
     return (
       <Stack.Navigator >
           <Stack.Screen
-          options={{
-            headerTitle : '두 파이트 스크린',
-            // headerTitleAlign : 'center',
-            // headerStyle : styles.headerStyle,
-            // headerTitleStyle : styles.headerTitleStyle,
-            // headerLeft : ()=>{return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle }></Image></TouchableOpacity>},
-          }}
-          name="BottomTabNavigator"
-          component={BottomTabNavigator} />
+          name="Main"
+          component={BottomTabNavigator}
+          />
 
           <Stack.Screen
           options={{
