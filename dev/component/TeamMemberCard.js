@@ -1,13 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  TouchableHighlight
+  Image,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -21,12 +18,25 @@ export default class TeamMemberCard extends React.Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.position}>TOP</Text>
-        <View style={styles.infos}>
-          <Text>다리우스 삼촌</Text>
-          <Text>다이아4</Text>
+        <View style={styles.tierWrapper}>
+          <Image style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Grandmaster.png')}/>
+          <Text style={styles.tierText}>그랜드마스터</Text>
         </View>
-        <Text style={styles.point}>100</Text>
+        <View style={styles.infos}>
+          <Text style={styles.nickname}>다리우스 삼촌</Text>
+          <View style={styles.positionWrapper}>
+            <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Grandmaster-Top.png')}/>
+            <Text style={styles.positionText}>TOP</Text>
+          </View>     
+        </View>
+        <View style={styles.actionsWrapper}>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionButtonText}>변경</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionButtonText}>정보</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -39,22 +49,58 @@ const styles=StyleSheet.create({
     justifyContent:'space-evenly',
     alignItems:'center',
     height:100,
-    backgroundColor:'#aaa',
+    // backgroundColor:'#666',
+    borderWidth:2,
+    borderColor:'#6e6e6e',
     borderRadius: 30,
     marginVertical:10,
     marginHorizontal:5,
     padding:10,
   },
-  position: {
-    fontSize:18,
+  tierWrapper: {
     flex:2,
-    textAlign: 'center'
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  tierImage: {
+    width:48,
+    height:48,
+    marginBottom:5
+  },
+  tierText: {
+    fontSize:12,
   },
   infos: {
     flex:5,
   },
-  point: {
-    flex:2,
-    textAlign: 'center'
+  nickname: {
+    fontSize:16
+  },
+  positionWrapper: {
+    flexDirection:'row',
+    justifyContent:'flex-start'
+  },
+  positionImage: {
+    width:16,
+    height:16,
+    marginRight:5
+  },
+  positionText: {
+    fontSize:14
+  },
+  actionsWrapper: {
+    flex:1
+  },
+  actionButton: {
+    borderWidth:1,
+    backgroundColor:'#101010',
+    borderColor:'#101010',
+    borderRadius:5,
+    alignItems:'center',
+    margin:2
+  },
+  actionButtonText: {
+    color:'#fff',
+    fontSize:12
   }
 });

@@ -4,20 +4,14 @@ import {
 } from 'react-native';
 import StackNavigator from './navigator/StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
+import { LogBox } from 'react-native';
 
 export default function App() {
+  LogBox.ignoreAllLogs();//Ignore all log notifications
+
   return (
     <NavigationContainer>
       <StackNavigator></StackNavigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container : {
-    // flex:1,
-    // alignContent:'center',
-    // justifyContent:'center',
-    // alignItems:'center'
-  }
-});

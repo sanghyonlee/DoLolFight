@@ -1,17 +1,18 @@
-import TeamListScreen from '../screen/TeamListScreen';
-import LeagueScreen from '../screen/LeagueScreen';
+import MyLeagueScreen from '../screen/MyLeagueScreen';
+import LeagueListScreen from '../screen/LeagueListScreen';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image
+  Alert,
+  StyleSheet, Text,
 } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MyInfoScreen from '../screen/MyInfoScreen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const BottomTab = createMaterialBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'LeagueScreen';
+const activeIconSize = 24, inActiveIconSize = 20;
 
 export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ 
@@ -23,33 +24,48 @@ export default function BottomTabNavigator({ navigation, route }) {
   });
 
   return (
-    <BottomTab.Navigator
+    <Tab.Navigator
     initialRouteName={INITIAL_ROUTE_NAME}
     barStyle={styles.tabBarStyle}
+    tabbar={TabBar}
     >
 
-      <BottomTab.Screen
-      name="LeagueScreen"
-      component={LeagueScreen}
+      <Tab.Screen
+      name="MyLeagueScreen"
+      component={MyLeagueScreen}
       options={{
-        title: '대회',
-        tabBarIcon: () => {
-          return <Image source={require('../assets/images/bt_nv_home.png')} style={styles.iconStyle}/>;
-        },
-      }}/>
-
-      <BottomTab.Screen
-      name="TeamListScreen"
-      component={TeamListScreen}
-      options={{
-        title: '팀',
-        tabBarIcon: () => {
-          return <Image source={require('../assets/images/bt_nv_home.png')} style={styles.iconStyle}/>;
+        title: '내 리그',
+        tabBarIcon: ({focused}) => {
+          const size = focused ? activeIconSize : inActiveIconSize;
+          return <Icon name="home" size={size} color="#000" />;
         },
       }}
       />
 
-    </BottomTab.Navigator>
+      <Tab.Screen
+      name="LeagueListScreen"
+      component={LeagueListScreen}
+      options={{
+        title: '대회',
+        tabBarIcon: ({focused}) => {
+          const size = focused ? activeIconSize : inActiveIconSize;
+          return <Icon name="trophy" size={size} color="#000" />;
+        },
+      }}/>
+
+      <Tab.Screen
+      name="MyInfo"
+      component={MyInfoScreen}
+      options={{
+        title: '내 정보',
+        tabBarIcon: ({focused}) => {
+          const size = focused ? activeIconSize : inActiveIconSize;
+          return <Icon name="user-circle" size={size} color="#000" />;
+        },
+      }}
+      />
+
+    </Tab.Navigator>
   );
 }
 
@@ -57,10 +73,12 @@ function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case 'LeagueScreen':
-      return '리그';
-    case 'TeamListScreen':
-      return '팀 리스트';
+    case 'LeagueListScreen':
+      return '대회 목록';
+    case 'MyLeagueScreen':
+      return '내 리그';
+    case 'MyInfo':
+      return '내 정보';
   }
 }
 
@@ -68,12 +86,36 @@ function getHeaderRight(navigation,route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case 'LeagueScreen':
-      return <TouchableOpacity style={styles.headerLeftStyle} onPress={()=>{navigation.navigate('TeamManageScreen')}}><Text>as</Text></TouchableOpacity>;
-    case 'TeamListScreen':
-      return <View style={styles.headerRightStyle}><Text>vs</Text></View>;
+    case 'MyLeagueScreen':
+      return <TouchableOpacity
+      style={styles.headerRightStyle}
+      onPress={()=>{
+        // Alert.alert('hi')
+        Alert.prompt(
+          "팀 가입",
+          "팀장으로부터 받은 team key 를 입력하세요.",
+          [
+            {
+              text: "취소",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            {
+              text: "가입",
+              onPress: password => console.log("OK Pressed, password: " + password)
+            }
+          ],
+          "plain-text"
+        );
+      }}>
+        <Text style={styles.headerRightTextStyle}>팀가입</Text>
+      </TouchableOpacity>;
     
   }
+}
+
+function TabBar() {
+  return <View></View>;
 }
 
 const styles = StyleSheet.create({
@@ -86,10 +128,26 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tabBarStyle : {
-    backgroundColor : "#fff"
+    // backgroundColor : 'linear-gradient(#e66465, #9198e5)'
+    backgroundColor : '#fff'
   },
-  iconStyle : {width:20, height:20},
-  // logoImg : {width:105, height:25},
-  headerLeftStyle : {width:16, height:16,resizeMode:'contain',marginLeft:20},
-  headerRightStyle : {width:26, height:26,resizeMode:'contain',marginRight:20}
+  iconStyle : {
+    width:24,
+    height:24
+  },
+  headerLeftStyle : {
+    width:16,
+    height:16,
+    resizeMode:'contain',
+    marginLeft:20
+  },
+  headerRightStyle : {
+    width:40,
+    height:26,
+    resizeMode:'contain',
+    marginRight:10
+  },
+  headerRightTextStyle: {
+    color: 'white'
+  }
 });

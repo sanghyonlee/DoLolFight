@@ -17,6 +17,11 @@ export default function TeamManageScreen({ navigation, route }) {
     <View style={styles.container}>
       <View>
         <Text style={styles.titleText}>고쥬노 화이팅!</Text>
+        <View style={styles.tierWrapper}>
+          <Image style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Platinum.png')}></Image>
+          <Text style={styles.tierInfo}>플래티넘2</Text>
+        </View>
+        
       </View>
 
       <View>
@@ -45,6 +50,19 @@ const styles=StyleSheet.create({
     backgroundColor:'#fff'
   },
   titleText: {
-    fontSize: 24
+    fontSize: 24,
+    padding:10
+  },
+  tierWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  tierImage: {
+    width:40,
+    height:40,
+  },
+  tierInfo: {
+    color:'#6e6e6e',
+    fontSize:12
   }
 });
