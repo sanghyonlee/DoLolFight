@@ -15,7 +15,6 @@ export default function RecruitScreen({ navigation }) {
           <Text style={styles.actionButtonText}>영입</Text>
         </TouchableOpacity>
       </View>)
-
       }
     </ScrollView>
   );
