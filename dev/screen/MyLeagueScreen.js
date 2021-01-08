@@ -13,29 +13,29 @@ const Tab = createMaterialTopTabNavigator();
 export default function LeagueListScreen({ navigation }) {
   return (
     <Tab.Navigator
-    tabBarOptions={{
-      indicatorStyle: {backgroundColor: '#333333'}
-    }} >
+      tabBarOptions={{
+        indicatorStyle: { backgroundColor: '#333333' }
+      }} >
 
       <Tab.Screen
-      name="FutureLeague"
-      component={FutureListScreen}
-      options={{
-        title: '현재 리그'
-      }} />
+        name="FutureLeague"
+        component={FutureListScreen}
+        options={{
+          title: '현재 리그'
+        }} />
 
       <Tab.Screen
-      name="PastLeague"
-      component={PastListScreen}
-      options={{
-        title: '과거 리그',
-      }} />
+        name="PastLeague"
+        component={PastListScreen}
+        options={{
+          title: '과거 리그',
+        }} />
 
     </Tab.Navigator>
   );
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     // justifyContent:'space-evenly',
     // alignItems:'center'

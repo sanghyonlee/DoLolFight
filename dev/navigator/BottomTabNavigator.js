@@ -15,54 +15,54 @@ const INITIAL_ROUTE_NAME = 'LeagueScreen';
 const activeIconSize = 24, inActiveIconSize = 20;
 
 export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({ 
+  navigation.setOptions({
     title: getHeaderTitle(route),
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
-    headerVisible : true,
-    headerRight :()=>getHeaderRight(navigation,route)
+    headerVisible: true,
+    headerRight: () => getHeaderRight(navigation, route)
   });
 
   return (
     <Tab.Navigator
-    initialRouteName={INITIAL_ROUTE_NAME}
-    barStyle={styles.tabBarStyle}
-    tabbar={TabBar}
+      initialRouteName={INITIAL_ROUTE_NAME}
+      barStyle={styles.tabBarStyle}
+      tabbar={TabBar}
     >
 
       <Tab.Screen
-      name="MyLeagueScreen"
-      component={MyLeagueScreen}
-      options={{
-        title: '내 리그',
-        tabBarIcon: ({focused}) => {
-          const size = focused ? activeIconSize : inActiveIconSize;
-          return <Icon name="home" size={size} color="#000" />;
-        },
-      }}
+        name="MyLeagueScreen"
+        component={MyLeagueScreen}
+        options={{
+          title: '내 리그',
+          tabBarIcon: ({ focused }) => {
+            const size = focused ? activeIconSize : inActiveIconSize;
+            return <Icon name="home" size={size} color="#000" />;
+          },
+        }}
       />
 
       <Tab.Screen
-      name="LeagueListScreen"
-      component={LeagueListScreen}
-      options={{
-        title: '대회',
-        tabBarIcon: ({focused}) => {
-          const size = focused ? activeIconSize : inActiveIconSize;
-          return <Icon name="trophy" size={size} color="#000" />;
-        },
-      }}/>
+        name="LeagueListScreen"
+        component={LeagueListScreen}
+        options={{
+          title: '대회',
+          tabBarIcon: ({ focused }) => {
+            const size = focused ? activeIconSize : inActiveIconSize;
+            return <Icon name="trophy" size={size} color="#000" />;
+          },
+        }} />
 
       <Tab.Screen
-      name="MyInfo"
-      component={MyInfoScreen}
-      options={{
-        title: '내 정보',
-        tabBarIcon: ({focused}) => {
-          const size = focused ? activeIconSize : inActiveIconSize;
-          return <Icon name="user-circle" size={size} color="#000" />;
-        },
-      }}
+        name="MyInfo"
+        component={MyInfoScreen}
+        options={{
+          title: '내 정보',
+          tabBarIcon: ({ focused }) => {
+            const size = focused ? activeIconSize : inActiveIconSize;
+            return <Icon name="user-circle" size={size} color="#000" />;
+          },
+        }}
       />
 
     </Tab.Navigator>
@@ -82,35 +82,35 @@ function getHeaderTitle(route) {
   }
 }
 
-function getHeaderRight(navigation,route) {
+function getHeaderRight(navigation, route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
     case 'MyLeagueScreen':
       return <TouchableOpacity
-      style={styles.headerRightStyle}
-      onPress={()=>{
-        // Alert.alert('hi')
-        Alert.prompt(
-          "팀 가입",
-          "팀장으로부터 받은 team key 를 입력하세요.",
-          [
-            {
-              text: "취소",
-              onPress: () => console.log("Cancel Pressed"),
-              style: "cancel"
-            },
-            {
-              text: "가입",
-              onPress: password => console.log("OK Pressed, password: " + password)
-            }
-          ],
-          "plain-text"
-        );
-      }}>
+        style={styles.headerRightStyle}
+        onPress={() => {
+          // Alert.alert('hi')
+          Alert.prompt(
+            "팀 가입",
+            "팀장으로부터 받은 team key 를 입력하세요.",
+            [
+              {
+                text: "취소",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              {
+                text: "가입",
+                onPress: password => console.log("OK Pressed, password: " + password)
+              }
+            ],
+            "plain-text"
+          );
+        }}>
         <Text style={styles.headerRightTextStyle}>팀가입</Text>
       </TouchableOpacity>;
-    
+
   }
 }
 
@@ -127,25 +127,25 @@ const styles = StyleSheet.create({
     color: "#fff",
     alignSelf: 'center',
   },
-  tabBarStyle : {
+  tabBarStyle: {
     // backgroundColor : 'linear-gradient(#e66465, #9198e5)'
-    backgroundColor : '#fff'
+    backgroundColor: '#fff'
   },
-  iconStyle : {
-    width:24,
-    height:24
+  iconStyle: {
+    width: 24,
+    height: 24
   },
-  headerLeftStyle : {
-    width:16,
-    height:16,
-    resizeMode:'contain',
-    marginLeft:20
+  headerLeftStyle: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
+    marginLeft: 20
   },
-  headerRightStyle : {
-    width:40,
-    height:26,
-    resizeMode:'contain',
-    marginRight:10
+  headerRightStyle: {
+    width: 40,
+    height: 26,
+    resizeMode: 'contain',
+    marginRight: 10
   },
   headerRightTextStyle: {
     color: 'white'

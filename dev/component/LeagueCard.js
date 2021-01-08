@@ -27,59 +27,59 @@ export default function LeagueCard() {
 
       <View style={styles.registerButtonWrapper}>
         <TouchableOpacity
-          onPress={()=>{
+          onPress={() => {
 
           }}>
           <Text style={styles.registerButtonText}>신청</Text>
         </TouchableOpacity>
       </View>
-        
-      
-      
-    
+
+
+
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection:'row',
-    alignItems:'center',
+    flexDirection: 'row',
+    alignItems: 'center',
     // justifyContent:'center',
-    padding:10,
-    borderWidth:1,
-    borderColor:'#6e6e6e',
-    borderRadius:10,
-    marginVertical:10
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#6e6e6e',
+    borderRadius: 10,
+    marginVertical: 10
   },
   timeWrapper: {
-    flex:2,
-    alignItems:'center'
+    flex: 2,
+    alignItems: 'center'
   },
   leagueRound: {
-    flex:1
+    flex: 1
   },
   leagueRoundText: {
-    textAlign:'center'
+    textAlign: 'center'
   },
   registeredTeamNumber: {
-    flex:3
+    flex: 3
   },
   registeredTeamNumberText: {
-    textAlign:'center'
+    textAlign: 'center'
   },
   registerButtonWrapper: {
-    flex:1
+    flex: 1
   },
   registerButtonText: {
-    textAlign:'center',
-    fontSize:12,
-    justifyContent:'center',
-    alignItems:'center',
-    borderWidth:1,
-    borderColor:'#6e6e6e',
-    borderRadius:10,
-    padding:2
+    textAlign: 'center',
+    fontSize: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#6e6e6e',
+    borderRadius: 10,
+    padding: 2
   }
 
 });

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
+import RecruitScreen from '../screen/RecruitScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,19 +16,29 @@ export default class StackNavigator extends React.Component {
   render() {
     return (
       <Stack.Navigator >
-          <Stack.Screen
-          name="Main"
-          component={BottomTabNavigator}/>
+        <Stack.Screen
+          name="내 리그"
+          component={BottomTabNavigator} />
 
-          <Stack.Screen
+        <Stack.Screen
           options={{
-            headerTitle : '팀 관리',
-            headerTitleAlign : 'center',
-            headerStyle : styles.headerStyle,
-            headerTitleStyle : styles.headerTitleStyle,
+            headerTitle: '팀 관리',
+            headerTitleAlign: 'center',
+            headerStyle: styles.headerStyle,
+            headerTitleStyle: styles.headerTitleStyle,
           }}
           name="TeamManageScreen"
           component={TeamManageScreen} />
+
+        <Stack.Screen
+          options={{
+            headerTitle: '팀 영입',
+            headerTitleAlign: 'center',
+            headerStyle: styles.headerStyle,
+            headerTitleStyle: styles.headerTitleStyle,
+          }}
+          name="RecruitScreen"
+          component={RecruitScreen} />
 
       </Stack.Navigator>
     )
@@ -43,10 +54,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     alignSelf: 'center',
   },
-  headerRightStyle : {
-    width:16,
-    height:16,
-    resizeMode:'contain',
-    marginRight:12
+  headerRightStyle: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
+    marginRight: 12
   },
 });

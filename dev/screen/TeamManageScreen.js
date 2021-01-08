@@ -10,8 +10,8 @@ import TeamMemberCard from '../component/TeamMemberCard';
 
 export default function TeamManageScreen({ navigation, route }) {
   const { teamId } = route.params;
-  navigation.setOptions({ 
-    headerLeft : ()=>{return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle }></Image></TouchableOpacity>},
+  navigation.setOptions({
+    headerLeft: () => { return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle}></Image></TouchableOpacity> },
   });
   return (
     <View style={styles.container}>
@@ -21,48 +21,48 @@ export default function TeamManageScreen({ navigation, route }) {
           <Image style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Platinum.png')}></Image>
           <Text style={styles.tierInfo}>플래티넘2</Text>
         </View>
-        
+
       </View>
 
       <View>
-        <TeamMemberCard></TeamMemberCard>
-        <TeamMemberCard></TeamMemberCard>
-        <TeamMemberCard></TeamMemberCard>
-        <TeamMemberCard></TeamMemberCard>
-        <TeamMemberCard></TeamMemberCard>
+        <TeamMemberCard navigation={navigation}></TeamMemberCard>
+        <TeamMemberCard navigation={navigation}></TeamMemberCard>
+        <TeamMemberCard navigation={navigation}></TeamMemberCard>
+        <TeamMemberCard navigation={navigation}></TeamMemberCard>
+        <TeamMemberCard navigation={navigation}></TeamMemberCard>
       </View>
     </View>
   );
 }
 
-const styles=StyleSheet.create({
-  headerLeftStyle : {
-    width:16,
-    height:16,
-    resizeMode:'contain',
-    marginLeft:12
+const styles = StyleSheet.create({
+  headerLeftStyle: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
+    marginLeft: 12
   },
   container: {
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-    marginHorizontal:5,
-    backgroundColor:'#fff'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 5,
+    backgroundColor: '#fff'
   },
   titleText: {
     fontSize: 24,
-    padding:10
+    padding: 10
   },
   tierWrapper: {
     justifyContent: 'center',
     alignItems: 'center'
   },
   tierImage: {
-    width:40,
-    height:40,
+    width: 40,
+    height: 40,
   },
   tierInfo: {
-    color:'#6e6e6e',
-    fontSize:12
+    color: '#6e6e6e',
+    fontSize: 12
   }
 });

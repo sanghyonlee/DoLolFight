@@ -19,7 +19,7 @@ export default function LeagueScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    marginHorizontal:20
+    flex: 1,
+    marginHorizontal: 20
   }
 });
