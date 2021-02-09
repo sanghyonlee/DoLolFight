@@ -3,58 +3,82 @@ import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
+import axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getTeamInfo } from '../external/userApis';
+import Icon from 'react-native-vector-icons/Ionicons';
 // import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default class TeamCard extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+    console.log(this.props.height);
+    const teaminfo = this.props.teaminfo
     const { navigation } = this.props;
+    var tournament_date = new Date(teaminfo.register_id.schedule_id.tournament_datetime)
+    tournament_date = make_date_format(tournament_date)
+    function make_date_format(date){
+      var year = tournament_date.getFullYear();
+      var month = tournament_date.getMonth()+1;
+      var day = tournament_date.getDate();
+      var hour = tournament_date.getHours();
+      
+      var ampm = null
+      if(hour > 12){
+        hour=hour-12;
+        ampm="오후";
+      }else{
+        ampm="오전";
+      }
+      var min = tournament_date.getMinutes();
+      min < 10 ? min='0' + min : min = min
+      tournament_date = (year + ". " + month + ". " + day + ". " + ampm + " " + hour + ":" + min)
+      return tournament_date;
+    }
+    
     return (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('TeamManageScreen', { teamId: 1 })
+          navigation.navigate('TeamManageScreen', { teaminfo: teaminfo })
         }}
+        
       >
-        <View style={styles.container}>
-          <Text style={styles.LegueTime}>
-            경기 일자 : {new Date('2020-01-01T20:00').toLocaleString()}
-          </Text>
+        <View style={[styles.container,{height:this.props.height}]}>
+            <View style={{flex:0.1}}></View>
+            <View style={styles.firstViewContainer}>
+                <Image resizeMode="contain" style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Platinum.png')}></Image>
+                <Text adjustsFontSizeToFit={true} numberOfLines={1} style={styles.tierText}>Platinum IV</Text>
+            </View>
 
-          <View>
-            <Text>고쥬노 화이팅</Text>
-          </View>
-
-          <Image style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Platinum.png')}></Image>
-
-          <View>
-            <View style={styles.userInfo}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Grandmaster-Top.png')}></Image>
-              <Text style={styles.userName}>다리우스 삼촌</Text>
+            <View style={{flex:0.1}}></View>
+            <View style={styles.secondViewContainer}>
+              <View style={{flex:1}}>
+                <Text adjustsFontSizeToFit={true} numberOfLines={1} style={styles.dateText}>경기 일정 : {tournament_date} </Text>
+              </View>
+              <View style={styles.teamNameAndLeader}>
+                <View style={{flex:1}}>
+                  <View style={styles.teamNameView}>
+                    <Text style={styles.teamName}>{teaminfo.TeamName}</Text>
+                  </View>
+                  <View style={{flex:1}}>
+                    <Text style={styles.leaderText}>Leader : {teaminfo.Leader}</Text>
+                  </View>
+                </View>
+                <View style={{flex:0.35, alignItems:'center', justifyContent:'center'}}>
+                  <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                    <Icon name="ellipsis-horizontal-circle-outline" size={45} color="rgba(86, 133, 255, 255)"></Icon>
+                    <Text adjustsFontSizeToFit={true} numberOfLines={1} style={[styles.detailText]}>상세정보</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={{flex:0.25, }}></View>
+              
             </View>
-            <View style={styles.userInfo}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Plat-Jungle.png')}></Image>
-              <Text style={styles.userName}>엌거기박슨데엨</Text>
-            </View>
-            <View style={styles.userInfo}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Plat-Mid.png')}></Image>
-              <Text style={styles.userName}>화내시는겁니까</Text>
-            </View>
-            <View style={styles.userInfo}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Diamond-Bot.png')}></Image>
-              <Text style={styles.userName}>일진김구</Text>
-            </View>
-            <View style={styles.userInfo}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Diamond-Support.png')}></Image>
-              <Text style={styles.userName}>고쥬노</Text>
-            </View>
-          </View>
-
         </View>
       </TouchableOpacity>
     );
@@ -64,22 +88,27 @@ export default class TeamCard extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
     alignItems: 'center',
-    height: 200,
-    borderWidth: 1,
-    borderColor: '#6e6e6e',
+    borderWidth: 3,
+    "borderColor": "rgba(86, 133, 255, 255)",
+    "backgroundColor": "rgba(255, 255, 255, 255)",
     borderRadius: 30,
-    marginVertical: 10,
-    marginHorizontal: 5
+    marginTop: 8,
   },
-  LegueTime: {
-    position: 'absolute',
-    top: 5,
+  firstViewContainer:{
+    flex:1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems:'center',
+  },
+  secondViewContainer:{
+    flex:4,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   tierImage: {
-    width: 48,
-    height: 48
+    width: 60,
+    height: 70
   },
   userInfo: {
     flexDirection: 'row',
@@ -93,5 +122,49 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 12,
+  },
+  teamName:{
+    flex:1,
+    "fontFamily": "Noto Sans CJK KR",
+    "fontWeight": "600",
+    "fontSize": 30,
+    "color": "rgba(86, 133, 255, 255)",
+    marginLeft:5,
+  },
+  dateText:{
+    flex:1,
+    "fontFamily": "Noto Sans CJK KR",
+    "fontWeight": "600",
+    "fontSize": 17,
+    "color": "rgba(51, 51, 51, 255)"
+  },
+  teamNameAndLeader:{
+    flex:2.5,
+    flexDirection:'row',
+    borderColor:'rgba(135, 171, 255, 255)',
+    borderLeftWidth:2,
+  },
+  teamNameView:{
+    flex:1.5, 
+    justifyContent:'center',
+    borderColor:'rgba(135, 171, 255, 255)',
+    borderBottomWidth:2,
+  },
+  leaderText:{
+    flex:1,
+    "fontFamily": "Noto Sans CJK KR",
+    "fontWeight": "600",
+    "fontSize": 17,
+    "color": "rgba(51, 51, 51, 255)",
+    marginLeft:5,
+  },
+  detailText:{
+    fontWeight:"700" , 
+    color: "rgba(86, 133, 255, 255)"
+  },
+  tierText:{
+    "fontFamily": "Noto Sans CJK KR",
+    "fontWeight": "700",
+    color:"rgba(172,172,181,255)"
   }
 });

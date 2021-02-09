@@ -18,19 +18,15 @@ export default class TeamMemberCard extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      this.props == undefined ?
+      this.props.user != null ?
         <View style={styles.container}>
           <View style={styles.tierWrapper}>
             <Image style={styles.tierImage} source={require('../assets/ranked-emblems/Emblem_Grandmaster.png')} />
-            <Text style={styles.tierText}>그랜드마스터</Text>
+            <Text style={styles.tierText}>{this.props.user.split("/")[1]}</Text>
           </View>
 
           <View style={styles.infos}>
-            <Text style={styles.nickname}>다리우스 삼촌</Text>
-            <View style={styles.positionWrapper}>
-              <Image style={styles.positionImage} source={require('../assets/ranked-positions/Position_Grandmaster-Top.png')} />
-              <Text style={styles.positionText}>TOP</Text>
-            </View>
+            <Text style={styles.nickname}>{this.props.user.split("/")[0]}</Text>
           </View>
 
           <View style={styles.actionsWrapper}>
@@ -58,24 +54,14 @@ export default class TeamMemberCard extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  headerLeftStyle: {
-    width: 16,
-    height: 16,
-    resizeMode: 'contain',
-    marginLeft: 12
-  },
   container: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    height: 100,
-    borderWidth: 2,
+    flex:1,
+    borderWidth: 1,
     borderColor: '#6e6e6e',
-    borderRadius: 30,
-    marginVertical: 10,
-    marginHorizontal: 5,
-    padding: 10,
   },
   tierWrapper: {
     flex: 2,
@@ -94,7 +80,10 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   nickname: {
-    fontSize: 16
+      "fontFamily": "Noto Sans CJK KR",
+      "fontWeight": "600",
+      "fontSize": 30,
+      "color": "#000",
   },
   positionWrapper: {
     flexDirection: 'row',

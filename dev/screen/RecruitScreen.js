@@ -5,6 +5,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 export default function RecruitScreen({ navigation }) {
   navigation.setOptions({
     headerLeft: () => { return <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/go_back_button.png')} style={styles.headerLeftStyle}></Image></TouchableOpacity> },
+    headerRight: () => { return <View></View>}
   });
   const list = ['니뒤에박스조심', '엌거기박슨데엨', '고쥬노', '일진김구', '화내시는겁니까'];
   return (

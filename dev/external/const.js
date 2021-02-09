@@ -1,1 +1,1 @@
-export const url = 'TODO : this will be url';
+export const url = 'http://172.30.1.51:3000';

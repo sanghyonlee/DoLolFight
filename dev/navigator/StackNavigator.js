@@ -8,34 +8,31 @@ import {
   Image
 } from 'react-native';
 import RecruitScreen from '../screen/RecruitScreen';
-
+import { Dimensions } from 'react-native';
+import { HeaderTitle } from './../component/HeaderTitle';
 const Stack = createStackNavigator();
-
+const windowHeight = Dimensions.get('window').height;
 export default class StackNavigator extends React.Component {
 
   render() {
     return (
-      <Stack.Navigator >
+      <Stack.Navigator>
         <Stack.Screen
           name="내 리그"
           component={BottomTabNavigator} />
 
         <Stack.Screen
           options={{
-            headerTitle: '팀 관리',
-            headerTitleAlign: 'center',
-            headerStyle: styles.headerStyle,
-            headerTitleStyle: styles.headerTitleStyle,
+            headerTitle: ()=> <HeaderTitle title="팀 관리"/>,
+            headerStyle:{height:windowHeight/13}
           }}
           name="TeamManageScreen"
           component={TeamManageScreen} />
 
         <Stack.Screen
           options={{
-            headerTitle: '팀 영입',
-            headerTitleAlign: 'center',
-            headerStyle: styles.headerStyle,
-            headerTitleStyle: styles.headerTitleStyle,
+            headerTitle: ()=> <HeaderTitle title="팀 영입"/>,
+            headerStyle:{height:windowHeight/13}
           }}
           name="RecruitScreen"
           component={RecruitScreen} />
@@ -47,17 +44,13 @@ export default class StackNavigator extends React.Component {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor: '#0c1b31',
+    backgroundColor: '#FFF',
   },
   headerTitleStyle: {
-    fontWeight: 'bold',
-    color: "#fff",
+    fontFamily:"Noto Sans CJK KR",
+    fontWeight: "700",
+    color: "rgba(86, 133, 255, 255)",
     alignSelf: 'center',
-  },
-  headerRightStyle: {
-    width: 16,
-    height: 16,
-    resizeMode: 'contain',
-    marginRight: 12
+    justifyContent:'center'
   },
 });

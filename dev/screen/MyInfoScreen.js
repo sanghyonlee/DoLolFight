@@ -3,11 +3,11 @@ import {
   Image,
   StyleSheet,
   Text,
-  Alert,
   View,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import prompt from 'react-native-prompt-android'
 
 export default function MyInfoScreen() {
   return (
@@ -16,7 +16,7 @@ export default function MyInfoScreen() {
         <Text style={styles.nickname}>니뒤에박스조심 </Text>
         <TouchableOpacity
           onPress={() => {
-            Alert.prompt(
+            prompt(
               "닉 변경",
               "닉네임을 입력하세요. \n 신청중인 리그가 있다면 닉네임을 변경할 수 없습니다. \n 타인의 닉네임을 도용할 경우 정책에 의거하여 법적인 조치를 받을 수 있습니다.",
               [
@@ -33,7 +33,7 @@ export default function MyInfoScreen() {
               "plain-text"
             );
           }}>
-          <Icon style={styles.nicknameEditIcon} name="edit" size={30} color="#4b4b4b" />
+          <Icon style={styles.nicknameEditIcon} name="wrench" size={30} color="#4b4b4b" />
         </TouchableOpacity>
       </Text>
 

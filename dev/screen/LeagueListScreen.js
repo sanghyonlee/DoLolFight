@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import LeagueCard from '../component/LeagueCard';
 
+
 export default function LeagueScreen() {
   return (
     <ScrollView style={styles.container}>

@@ -10,17 +10,21 @@ import MyInfoScreen from '../screen/MyInfoScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TabBarCustom from './TabBarCustom';
-
+import { Dimensions } from 'react-native';
+import { HeaderTitle } from './../component/HeaderTitle';
+import { useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'LeagueScreen';
+const INITIAL_ROUTE_NAME = 'MyLeagueScreen';
 
 export default function BottomTabNavigator({ navigation, route }) {
+  const window = useSelector((store)=> store.window)
+  const windowHeight = window.height;
   navigation.setOptions({
-    title: getHeaderTitle(route),
-    headerStyle: styles.headerStyle,
-    headerTitleStyle: styles.headerTitleStyle,
+    headerTitle : ()=><HeaderTitle title={getHeaderTitle(route)}/>,
+    headerStyle: {height:windowHeight/13},
+    //headerTitleStyle: styles.headerTitleStyle,
     headerVisible: true,
-    headerRight: () => getHeaderRight(navigation, route)
+
   });
 
   return (
@@ -58,7 +62,7 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
+  
   switch (routeName) {
     case 'LeagueListScreen':
       return '대회 목록';
@@ -102,11 +106,12 @@ function getHeaderRight(navigation, route) {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor: '#0c1b31',
+    backgroundColor: '#FFFFFF',
   },
   headerTitleStyle: {
-    fontWeight: 'bold',
-    color: "#fff",
+    fontFamily:"Noto Sans CJK KR",
+    fontWeight: "700",
+    color: "rgba(86, 133, 255, 255)",
     alignSelf: 'center',
   },
   tabBarStyle: {
